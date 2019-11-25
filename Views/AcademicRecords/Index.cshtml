@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Lab5.Models.DataAccess.AcademicRecord>
+
+@{
+    ViewData["Title"] = "Academic Records";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-controller="AcademicRecords" asp-action="Index" asp-route-sort="course">
+                    Course
+                </a>
+            </th>
+            <th>
+                <a asp-controller="AcademicRecords" asp-action="Index" asp-route-sort="student">
+                    Student
+                </a>
+            </th>
+            <th>
+                <a asp-controller="AcademicRecords" asp-action="Index" asp-route-sort="grade">
+                    Grade
+                </a>
+            </th>
+            <th>
+                <a asp-controller="AcademicRecords" asp-action="EditAll">
+                    Edit All
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseCodeNavigation.Code)
+                -
+                @Html.DisplayFor(modelItem => item.CourseCodeNavigation.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Id)
+                -
+                @Html.DisplayFor(modelItem => item.Student.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                <a asp-controller="AcademicRecords" asp-action="Edit"
+                   asp-route-course="@(item.CourseCode)" 
+                   asp-route-student="@(item.StudentId)">
+                    Edit
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,69 @@
+﻿@model Lab5.Models.DataAccess.AcademicRecord[]
+
+@{
+    ViewData["Title"] = "EditAll";
+}
+
+<h1>EditAll</h1>
+
+<form method="post" asp-action="EditAll">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-controller="AcademicRecords" asp-action="EditAll" asp-route-sort="course">
+                        Course
+                    </a>
+                </th>
+                <th>
+                    <a asp-controller="AcademicRecords" asp-action="EditAll" asp-route-sort="student">
+                        Student
+                    </a>
+                </th>
+                <th>
+                    <a asp-controller="AcademicRecords" asp-action="EditAll" asp-route-sort="grade">
+                        Grade
+                    </a>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int i = 0;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseCodeNavigation.Code)
+                        -
+                        @Html.DisplayFor(modelItem => item.CourseCodeNavigation.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student.Id)
+                        -
+                        @Html.DisplayFor(modelItem => item.Student.Name)
+                    </td>
+                    <td>
+                        <input type="hidden" asp-for="@Model[i].CourseCode" />
+                        <input type="hidden" asp-for="@Model[i].StudentId" class="form-control" />
+                        <input asp-for="@Model[i].Grade" class="form-control" />
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+
+    <div class="pb-3">
+        <button type="submit" class="btn btn-primary">
+            Save
+        </button>
+        <a asp-controller="AcademicRecords" asp-action="Index" class="btn btn-secondary">
+            Cancel
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
