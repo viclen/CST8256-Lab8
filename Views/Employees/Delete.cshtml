@@ -1,4 +1,4 @@
-﻿@model Lab5.Models.DataAccess.Employee
+﻿@model Lab5.Models.EmployeeRoleSelections
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,28 +11,38 @@
     <h4>Employee</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.employee.Id)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.employee.Id)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.employee.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.employee.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.employee.UserName)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.employee.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            Job Title
+        </dt>
+        <dd class="col-sm-10">
+            @for (int i = 0; i < Model.roleSelections.Count; i++)
+            {
+                @Html.DisplayFor(model => model.roleSelections[i].role.Role1)
+                <br />
+            }
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="employee.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
